@@ -6,21 +6,20 @@ import products from "../json/products.json";
 
 // INITIALIZE FIREBASE
 const firebaseConfig = {
-  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
-  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
-  databaseURL: process.env.REACT_APP_FIREBASE_DATABASE_URL,
-  projectId: process.env.REACT_APP_FIREBASE_PROJECTID,
-  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
-  appId: process.env.REACT_APP_FIREBASE_APPID,
-  measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENTID
+  apiKey: "AIzaSyAtGABQOdWalmxrgwbtOi0XpUXGbbC3XXA",
+  authDomain: "wkdhw-d6760.firebaseapp.com",
+  projectId: "wkdhw-d6760",
+  storageBucket: "wkdhw-d6760.appspot.com",
+  messagingSenderId: "994295453380",
+  appId: "1:994295453380:web:5f51ae886442ae1bdd1b91",
+  measurementId: "G-25LNXVCXEP"
 };
 
 firebase.initializeApp(firebaseConfig);
 // REFERENCE PRODUCTS
-const productsCollectionRef = firebase.firestore().collection("products");
+const productsCollectionRef = firebase.firestore().collection("product");
 const productsDocRef = productsCollectionRef.doc("json");
-const allProductsCollectionRef = productsDocRef.collection("allProducts");
+const allProductsCollectionRef = productsDocRef.collection("allProduct");
 const allOrdersCollectionRef = firebase.firestore().collection("allOrders");
 
 //REFERENCE AUTH
@@ -34,12 +33,12 @@ export const getProductById = async (productId) => {
 
 export const getProducts = async (url) => {
   const collection = jsonInfo.find(element => element.url === url);
-  const collectionName = collection.name || "allProducts";
+  const collectionName = collection.name || "allProduct";
   let jsonProducts = [];
 
   // QUERY PRODUCTS
   let querySnapshot;
-  if (collectionName === "allProducts")
+  if (collectionName === "allProduct")
     querySnapshot = await allProductsCollectionRef.get();
   else
     querySnapshot = await allProductsCollectionRef.where("category", "==", collectionName).get();
@@ -77,11 +76,11 @@ export const registerWithEmailPassword = async (email, password, displayName) =>
 
 export const updateUserInfoApi = async (email, password, displayName) => {
   const user = auth.currentUser;
-  if(displayName)
+  if (displayName)
     await user.updateProfile({ displayName });
-  if(email)
+  if (email)
     await user.updateEmail(String(email));
-  if(password)
+  if (password)
     await user.updatePassword(password);
   return user;
 }
@@ -122,6 +121,6 @@ export const signOut = () => {
 
 export const checkLoginApi = () => {
   const user = auth.currentUser;
-  return user.uid?  true : false;
+  return user.uid ? true : false;
 }
 
