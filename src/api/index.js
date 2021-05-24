@@ -8,11 +8,20 @@ import products from "../json/products.json";
 const firebaseConfig = {
   apiKey: "AIzaSyAtGABQOdWalmxrgwbtOi0XpUXGbbC3XXA",
   authDomain: "wkdhw-d6760.firebaseapp.com",
+  databaseURL: "http://wkdhw-d6760.firebaseio.com",
   projectId: "wkdhw-d6760",
   storageBucket: "wkdhw-d6760.appspot.com",
   messagingSenderId: "994295453380",
   appId: "1:994295453380:web:5f51ae886442ae1bdd1b91",
   measurementId: "G-25LNXVCXEP"
+  // apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  // authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+  // databaseURL: process.env.REACT_APP_FIREBASE_DATABASE_URL,
+  // projectId: process.env.REACT_APP_FIREBASE_PROJECTID,
+  // storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+  // messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+  // appId: process.env.REACT_APP_FIREBASE_APPID,
+  // measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENTID
 };
 
 firebase.initializeApp(firebaseConfig);
@@ -52,12 +61,12 @@ export const feedProducts = () => {
   products.forEach((product) => {
     const docRef = allProductsCollectionRef.doc();
     const id = docRef.id;
-    const user = auth.currentUser._id;
+    // const user = auth.currentUser._id;
 
     // Store Data for Aggregation Queries
     docRef.set({
       ...product,
-      user,
+      // user,
       id
     });
   })
