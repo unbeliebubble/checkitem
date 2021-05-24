@@ -17,9 +17,9 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 // REFERENCE PRODUCTS
-const productsCollectionRef = firebase.firestore().collection("product");
+const productsCollectionRef = firebase.firestore().collection("products");
 const productsDocRef = productsCollectionRef.doc("json");
-const allProductsCollectionRef = productsDocRef.collection("allProduct");
+const allProductsCollectionRef = productsDocRef.collection("allProducts");
 const allOrdersCollectionRef = firebase.firestore().collection("allOrders");
 
 //REFERENCE AUTH
@@ -33,12 +33,12 @@ export const getProductById = async (productId) => {
 
 export const getProducts = async (url) => {
   const collection = jsonInfo.find(element => element.url === url);
-  const collectionName = collection.name || "allProduct";
+  const collectionName = collection.name || "allProducts";
   let jsonProducts = [];
 
   // QUERY PRODUCTS
   let querySnapshot;
-  if (collectionName === "allProduct")
+  if (collectionName === "allProducts")
     querySnapshot = await allProductsCollectionRef.get();
   else
     querySnapshot = await allProductsCollectionRef.where("category", "==", collectionName).get();
@@ -78,6 +78,7 @@ export const updateUserInfoApi = async (email, password, displayName) => {
   const user = auth.currentUser;
   if (displayName)
     await user.updateProfile({ displayName });
+  // 等於{displayName:displayName}
   if (email)
     await user.updateEmail(String(email));
   if (password)
@@ -87,6 +88,7 @@ export const updateUserInfoApi = async (email, password, displayName) => {
 
 export const createOrderApi = async (order) => {
   const user = auth.currentUser.uid;
+
   const orderRef = await allOrdersCollectionRef.doc();
   const id = orderRef.id;
   // Store Data for Aggregation Queries
@@ -103,6 +105,7 @@ export const getOrderById = async (orderId) => {
   return doc.data()
 }
 
+
 export const getOrderByUser = async () => {
   const user = auth.currentUser.uid;
   let jsonOrders = [];
@@ -111,6 +114,7 @@ export const getOrderByUser = async () => {
   const querySnapshot = await allOrdersCollectionRef.where("user", "==", user).get();
   querySnapshot.forEach((doc) => {
     jsonOrders.push(doc.data());
+    console.log(jsonOrders)
   });
   return jsonOrders;
 }
@@ -121,6 +125,11 @@ export const signOut = () => {
 
 export const checkLoginApi = () => {
   const user = auth.currentUser;
-  return user.uid ? true : false;
+  if (user) {
+    return user.uid ? true : false;
+  } else {
+    return false
+  }
+
 }
 

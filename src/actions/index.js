@@ -32,6 +32,9 @@ import {
   BEGIN_ORDER_DETAIL,
   SUCCESS_ORDER_DETAIL,
   FAIL_ORDER_DETAIL,
+  SUCCESS_ORDERLIST,
+  FAIL_ORDERLIST,
+  GET_ORDERLIST_BY_UID
 } from "../utils/constants";
 
 import {
@@ -45,6 +48,8 @@ import {
   createOrderApi,
   getOrderById,
   checkLoginApi,
+  getOrderListByUid,
+  getOrderByUser 
 } from "../api";
 
 export const addCartItem = (dispatch, product, qty) => {
@@ -261,6 +266,28 @@ export const requestOrderDetail = async (dispatch, orderId) => {
     });
   }
 }
+
+export const creatOrderByUid = async (dispatch) => {
+  console.log();
+   dispatch({ type: GET_ORDERLIST_BY_UID });
+  try {
+    const order = await getOrderByUser();
+   
+    dispatch({ 
+      type: SUCCESS_ORDERLIST,
+      payload: order
+
+    });
+  } catch (error) {
+    dispatch({ 
+      type: FAIL_ORDERLIST, 
+      payload: error 
+    });
+  }
+}
+
+
+
 
 export const resetOrder = (dispatch) => {
   dispatch({ type: RESET_ORDER });

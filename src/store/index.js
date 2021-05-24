@@ -34,6 +34,9 @@ import {
   BEGIN_ORDER_DETAIL,
   SUCCESS_ORDER_DETAIL,
   FAIL_ORDER_DETAIL,
+  GET_ORDERLIST_BY_UID,
+  FAIL_ORDERLIST,
+  SUCCESS_ORDERLIST
 } from "../utils/constants";
 
 export const StoreContext = createContext();
@@ -113,6 +116,12 @@ const initialState = {
     loading: false,
     userInfo: null,
     error: "",
+  },
+  searchOrderDetailByUid: {
+    loading: false,
+    order: [],
+    error: null,
+    tapOrNot:false
   },
 };
 
@@ -252,6 +261,8 @@ function reducer(state, action) {
       };
     case LOGOUT_REQUEST:
       cartItems = [];
+      state.searchOrderDetailByUid.order=[];
+      state.searchOrderDetailByUid.tapOrNot=false;
       return {
         ...state,
         userSignin: {
@@ -363,6 +374,38 @@ function reducer(state, action) {
           error: action.payload,
         },
       };
+      case GET_ORDERLIST_BY_UID:
+      return{
+        ...state,
+        searchOrderDetailByUid: {
+          ...state.searchOrderDetailByUid,
+          loading: true,
+          tapOrNot:true
+      }
+    }
+    case FAIL_ORDERLIST:
+      return{
+        ...state,
+        searchOrderDetailByUid: {
+          ...state.searchOrderDetailByUid,
+          loading: false,
+          error:action.payload
+      }
+    }
+      case SUCCESS_ORDERLIST:
+        console.log("1234")
+        return {
+          ...state,
+      searchOrderDetailByUid: {
+        ...state.searchOrderDetailByUid,
+        loading: false,
+        order: action.payload,
+        error: null,
+      }
+      
+    }
+
+
     default:
       return state;
   }

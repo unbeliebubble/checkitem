@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import { StoreContext } from "../store";
 import CartSummary from "./CartSummary";
 import UserInfo from "./UserInfo";
+import OrderLink from "./Orderlink"
 import { setPage } from "../actions"
 
 export default function Header({ title }) {
@@ -23,6 +24,7 @@ export default function Header({ title }) {
         </div>
 
         <div className="header-left">
+
           <UserInfo style={{marginRight: '20px'}} />
           <CartSummary />
         </div>

@@ -8,7 +8,9 @@ import LoginCard from "../components/LoginCard";
 const { Header, Content, Footer } = Layout;
 
 function Login(props) {
+  console.log(QueryString.parse(props.location.search))
   const { redirect } = QueryString.parse(props.location.search);
+  console.log(redirect)
   return (
     <Layout className="container main-layout">
       <Layout className="bg-gray main-area">

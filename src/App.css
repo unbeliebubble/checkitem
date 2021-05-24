@@ -723,3 +723,50 @@ span.ham-menu-bar3--touch {
 .card-body {
   padding: 1rem;
 }
+.orderSearch_btn{
+  margin-left: auto;
+  margin-right: auto;
+  background-color: rgba(255, 255, 255, 0);
+  width: 12rem;
+  height: 4rem;
+  border-radius: 3rem;
+  border-color: rgb(12, 77, 88);
+  font-size: 1.6rem;
+  color: rgb(16, 144, 167);
+}
+.orderSearch_btn:hover{
+  background-color: rgba(255, 255, 255, 0.233);
+  border-radius: 3rem;
+  border-color: rgb(12, 77, 88);
+  
+}
+.orderSearch_btn:focus{
+  background-color: rgba(255, 255, 255, 0.103);
+  border-radius: 3rem;
+  border-color: rgb(12, 77, 88);
+  
+}
+.profile_cont{
+  display: flex;
+  flex-direction: column;
+ 
+}
+.profileOrder{
+
+  margin-bottom: 5rem;
+}
+.eachOrder_title{
+  
+
+  margin-top: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.eachOrder_title p{
+  font-size: 3rem;
+}
+.orderlist_empty{
+  font-size: 3rem;
+  
+}

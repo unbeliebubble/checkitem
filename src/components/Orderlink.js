@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 
 import { StoreContext } from "../store"
 
-export default function UserInfo(props) {
+export default function Orderlink(props) {
 
    const { state: { userSignin : { userInfo, remember } } } = useContext(StoreContext);
    const history = useHistory();
